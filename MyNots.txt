@@ -1,0 +1,33 @@
+1.
+python -m venv myenv
+source myenv/bin/activate
+pip install django
+django-admin startproject mysite
+cd mysite
+django-admin startapp pdf
+
+now We have created the project && app
+
+2. 在mysite/settings.py 中注册应用程序app时，两种方法都可以
+INSTALLED_APPS = [
+    ...
+    'pdf',
+    ...
+]
+或者
+INSTALLED_APPS = [
+    ...
+    'pdf.apps.PdfConfig',
+    ...
+]
+
+3. terminal输入：python manage.py migrate
+
+4. python manage.py runserver
+5. 创建model，存储user输入的信息 create a table in the database
+6. makemigrations  / migrate
+7. create a superuser =>  python manage.py createsuperuser  22015651 22015651
+8. admin.py 去register这个model 现在admin面板可以看到这个Profile是什么养的
+9. 创建一个form，来accept所有user data，并存在backend. pdf/templates/pdf/accept.html
+
+10.创建一个view来render这个form
