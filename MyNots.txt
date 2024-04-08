@@ -30,4 +30,23 @@ INSTALLED_APPS = [
 8. admin.py 去register这个model 现在admin面板可以看到这个Profile是什么养的
 9. 创建一个form，来accept所有user data，并存在backend. pdf/templates/pdf/accept.html
 
-10.创建一个view来render这个form
+10. 创建一个view来render这个form, pdf/views.py view的名字叫accept，也就是class 的名字
+11. 去url关联上这个view
+12. 去views.py修改是不是接收的是“POST”，用form传来的数据创建Profile object，然后把object存入database
+13. backend有了这些用户数据，来解决如何将这些数据转换成我们自己风格的PDF，它具有特定的格式
+思路： 创建一个CV的html页面/template ==》把这个template传入一个library，这个library会把这个template转换成一个可以下载的pdf。
+当你期望返回单个对象时，应该使用 get(id=id)。而当你期望返回一个集合（即使是可能只包含一个对象）时，可以使用 filter(id=id)。
+所以用这个user_profile = Profile.objects.filter(id=id)
+
+14. 为了完成这一步：把这个template传入一个library，这个library会把这个template转换成一个可以下载的pdf，下载：
+pip install pdfkit
+brew install Caskroom/cask/wkhtmltopdf 这将使用 Homebrew Cask 安装 wkhtmltopdf，Cask 是用于管理 macOS 应用程序的扩展。
+要输入密码（自己mac的密码）
+
+15. 进行 html---> pdf 转化
+pdf/views.py 添加：
+import pdfkit
+from django.http import HttpResponse
+from django.template import loader
+import io
+...

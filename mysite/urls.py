@@ -16,7 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from pdf import views
 
 urlpatterns = [
+    path('userlist/', views.userlist, name='list'),
+    path('cv/<int:id>/', views.cv, name='cv'),
+    path('', views.accept, name='accept'),
     path("admin/", admin.site.urls),
 ]
